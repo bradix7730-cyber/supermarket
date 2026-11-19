@@ -1,0 +1,70 @@
+
+#include <stdio.h>
+
+int main() {
+
+    char product[10][50];
+    int quantity[10];
+    int n, total = 0;
+    int highest, lowest;
+    int highIndex = 0, lowIndex = 0;
+
+    // 1. Enter number of products
+    printf("Enter number of products: ");
+    scanf("%d", &n);
+
+    if (n <= 0 || n > 10) {
+        printf("Invalid! Maximum is 10 products.\n");
+        return 0;
+    }
+
+    // 2 and 3. Enter product names and stock
+    for (int i = 0; i < n; i++) {
+
+        printf("Enter product name %d: ", i + 1);
+        scanf("%49s", product[i]);
+
+        printf("Enter stock quantity: ");
+        scanf("%d", &quantity[i]);
+
+        // Calculate total items
+        total = total + quantity[i];
+    }
+
+    // 4. Find highest and lowest stock
+    highest = quantity[0];
+    lowest = quantity[0];
+
+    for (int i = 0; i < n; i++) {
+
+        if (quantity[i] > highest) {
+            highest = quantity[i];
+            highIndex = i;
+        }
+
+        if (quantity[i] < lowest) {
+            lowest = quantity[i];
+            lowIndex = i;
+        }
+    }
+
+    // 5. Display inventory list
+    printf("\n========INVENTORY LIST=========\n");
+    printf("Product\t\tQuantity\n");
+
+    for (int i = 0; i < n; i++) {
+        printf("%s\t\t%d\n", product[i], quantity[i]);
+    }
+
+    // 6. Display total items
+    printf("\nTotal Items in Inventory: %d\n", total);
+
+    // 7. Display highest and lowest stock
+    printf("\nHighest Stock: %s (%d)\n",
+           product[highIndex], highest);
+
+    printf("Lowest Stock: %s (%d)\n",
+           product[lowIndex], lowest);
+
+    return 0;
+}
